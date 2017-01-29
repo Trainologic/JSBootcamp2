@@ -1,0 +1,6 @@
+.header:before {
+    display: inline-block;
+    width: 100px;
+    content: "";
+    border-bottom: 1px solid black;
+}

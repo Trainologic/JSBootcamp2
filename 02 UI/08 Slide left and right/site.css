@@ -1,0 +1,27 @@
+html, body {
+    height: 100%;
+    font-size: 2em;
+    margin: 0;
+}
+
+.layout {
+    margin-left: 100px;
+    width: 400px;
+    height: 600px;
+    border: 1px solid black;
+}
+
+.parent {
+    background-color: red;
+    height: 120px;
+    white-space: nowrap;
+    overflow: auto;
+}
+
+.cell {
+    display: inline-block;
+    width: 100px;
+    height: 80px;
+    border: 1px solid black;
+}
+
