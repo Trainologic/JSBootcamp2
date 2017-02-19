@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" id="html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="app/clock.component.css">
+</head>
+<body>
+    <clock></clock>
+
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <script>
+        SystemJS.config({
+            packages: {
+                app: {
+                    defaultExtension: "js"
+                }
+            },
+            map: {
+                "angular": "node_modules/angular/angular.js"
+            },
+            meta: {
+                "angular": {
+                    format: "global"
+                }
+            }
+        });
+
+        SystemJS.import("app/main");
+    </script>
+</body>
+</html>
