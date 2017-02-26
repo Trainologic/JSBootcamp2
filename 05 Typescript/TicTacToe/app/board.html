@@ -1,1 +1,7 @@
 <h1>{{$ctrl.time | date: 'HH:mm:ss'}}</h1>
+
+<div ng-repeat="cell in $ctrl.cells" ng-click="$ctrl.cellClicked(cell)">
+    {{cell.x}}
+    {{cell.y}}
+    {{cell.value}}
+</div>

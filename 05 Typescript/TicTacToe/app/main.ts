@@ -1,10 +1,10 @@
 import * as angular from "angular";
 import {appModule} from "./app.module";
-import {ClockComponent} from "./board.component";
+import {BoardComponent} from "./board.component";
 
 console.log("main");
 
 appModule
-ClockComponent;
+BoardComponent;
 
 angular.bootstrap(document.getElementById("html"), [appModule.name]);
