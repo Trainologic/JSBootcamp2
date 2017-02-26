@@ -1,0 +1,10 @@
+<ul>
+    <li ng-repeat="item in $ctrl.group.items"
+        ng-click="$ctrl.toggle(item, $event)">
+        <span>{{item.name}}</span>
+
+        <my-contact-tree group="item"
+                         ng-show="item.expanded"
+                         ng-show="!!item.items"></my-contact-tree>
+    </li>
+</ul>

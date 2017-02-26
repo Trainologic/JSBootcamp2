@@ -2,7 +2,8 @@ class HomeCtrl {
     name;
     contacts;
 
-    constructor() {
+    constructor(private $interval) {
+
         this.contacts = [
             {id: 1, name: "Ori"},
             {id: 2, name: "Roni"},
