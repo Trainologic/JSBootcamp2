@@ -1,0 +1,7 @@
+my-app ul {
+  list-style: none; }
+  my-app ul li {
+    padding: 1em; }
+    my-app ul li span {
+      margin-right: 1em;
+      color: yellow; }
