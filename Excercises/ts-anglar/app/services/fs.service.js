@@ -13,9 +13,27 @@ var FsService = (function () {
                 { id: 3, name: 'sub2', children: [] },
             ]
         };
+        this.currentFolder = this.root;
     }
+    FsService.prototype.subscribe = function (callback) {
+        this.callbacks = this.callbacks || [];
+        this.callbacks.push(callback);
+    };
+    FsService.prototype.fireCallbacks = function () {
+        for (var _i = 0, _a = this.callbacks; _i < _a.length; _i++) {
+            var callback = _a[_i];
+            callback();
+        }
+    };
     FsService.prototype.getRoot = function () {
         return this.root;
+    };
+    FsService.prototype.getCurrentFolder = function () {
+        return this.currentFolder;
+    };
+    FsService.prototype.setCurrentFolder = function (folder) {
+        this.currentFolder = folder;
+        this.fireCallbacks();
     };
     return FsService;
 }());

@@ -13,3 +13,20 @@
     border: solid 1px red;
     background-color: magenta;
 }
+
+
+
+.fsapp {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.content {
+    border: solid 1px red;
+    width: 70%;
+}
+
+.tree {
+    border: solid 1px orange;
+    width: 30%;
+}
