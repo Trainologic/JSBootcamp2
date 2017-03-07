@@ -1,0 +1,6 @@
+<span ng-right-click="$ctrl.showContextMenu($event)" ng-click="$ctrl.toggleChildren()">{{$ctrl.folder.name}}</span>
+<ul ng-if="$ctrl.showChildren">
+    <li ng-if="child.children" ng-repeat="child in $ctrl.folder.children">
+        <tree folder="child"></tree>
+    </li>
+</ul>

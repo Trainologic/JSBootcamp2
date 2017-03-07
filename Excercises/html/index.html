@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            var counter = 0;
+            $('#list a').click(createChild);
+
+            function createChild(event) {
+                event.stopPropagation();
+                var li = $('<li><a href="">item ' + (counter += 1) + '</a></li>');
+                $(li).children('a').click(createChild);
+                var ul = $('<ul></ul>');
+                li.appendTo(ul);
+                $(this).after(ul);
+                return false;
+            }
+        });
+    </script>
+</head>
+
+<body>
+
+    <ul id="list">
+        <li><a href="">root</a></li>
+    </ul>
+
+    <style>
+        .red {color:red;}
+    </style>
+</body>
+
+</html>
