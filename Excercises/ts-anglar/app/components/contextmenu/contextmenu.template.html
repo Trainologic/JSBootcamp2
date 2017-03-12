@@ -1,0 +1,9 @@
+<div ng-if="$ctrl.id" class="context-bg" ng-click="$ctrl.hideMe($event)">
+    <div class="context-menu" ng-style="{'top': $ctrl.posY + 'px','left':$ctrl.posX + 'px'}">
+        <ul>
+            <li ng-if="$ctrl.type=='folder'">New Folder</li>
+            <li ng-if="$ctrl.type=='folder'">New File</li>
+            <li ng-if="$ctrl.type!='folder'">This for file only</li>
+        </ul>
+    </div>
+</div>

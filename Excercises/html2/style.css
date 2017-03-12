@@ -1,0 +1,63 @@
+#fileBrowser {
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: flex-start;
+}
+
+#browser {
+    border: solid 1px;
+    width: 30%;
+    overflow: scroll;
+}
+
+#main {
+    border: solid 1px;
+    width: 70%;
+}
+
+#main div {
+    display: block;
+    float: left;
+    height: 120px;
+    width: 120px;
+    text-align: center;
+}
+
+#main div::before {
+    content: '';
+    display: block;
+    margin: auto;
+    width: 60px;
+    height: 60px;
+    border: solid 1px;
+}
+
+#main div.folder::before {
+    background-color: yellow;
+}
+
+#main div.file::before {
+    background-color: #fff;
+}
+
+#folderList [data-collapse=collapsed] ul {
+    display: none;
+}
+
+#folderList ul {
+    padding: 0px;
+    list-style: none;
+}
+
+#folderList ul li {
+    padding: 5px 0px 0px 10px;
+}
+
+#folderList ul li::before {
+    content: '[-]';
+    margin-right: 10px;
+}
+
+#folderList ul li[data-collapse=collapsed]::before {
+    content: '[+]';
+}

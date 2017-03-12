@@ -1,0 +1,32 @@
+.context-bg {
+    position: fixed;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+}
+
+.context-menu {
+    position:absolute;
+    width:100px;
+    height: 100px;
+    border: solid 1px red;
+    background-color: magenta;
+}
+
+
+
+.fsapp {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.content {
+    border: solid 1px red;
+    width: 70%;
+}
+
+.tree {
+    border: solid 1px orange;
+    width: 30%;
+}

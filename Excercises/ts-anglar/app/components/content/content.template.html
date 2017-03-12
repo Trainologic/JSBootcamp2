@@ -1,0 +1,6 @@
+<ul ng-right-click="$ctrl.showContextMenu($event)">
+    {{$ctrl.test}}
+    <li ng-repeat="child in $ctrl.folder.children">
+        <a href="#" ng-right-click="$ctrl.showContextMenu($event,child)">{{child.name}}</a>
+    </li>
+</ul>
