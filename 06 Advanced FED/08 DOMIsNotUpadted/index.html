@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>Send HTTP Request</button>
+    <span>0</span>
+
+    <script>
+        var button = document.querySelector("button");
+        var span = document.querySelector("span");
+        var counter = 0;
+
+        button.addEventListener("click", function() {
+            function step() {
+                ++counter;
+
+                updateSpan();
+
+                if(counter < 10) {
+                    setTimeout(step, 1000);
+                }
+            }
+
+            step();
+//            setTimeout(function() {
+//                step();
+//
+//            }, 1000);
+
+//            for(var i=0; i<10; i++) {
+//                ++counter;
+//
+//                updateSpan();
+//
+//                delay(1000);
+//            }
+        });
+
+        function updateSpan() {
+            span.innerText = counter.toString();
+        }
+
+        function delay(interval) {
+            var begin = new Date();
+            while(true) {
+                var end = new Date();
+
+                if(end - begin > interval) {
+                    break;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
