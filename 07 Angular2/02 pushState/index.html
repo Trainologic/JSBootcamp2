@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>Goto</button>
+
+    <a href="/about">About</a>
+
+    <script>
+        document.querySelector("button").addEventListener("click", function() {
+            history.pushState({}, null, "blabla");
+        });
+
+        window.addEventListener("popstate", function(e) {
+            console.log("popstate", e);
+        });
+    </script>
+</body>
+</html>
