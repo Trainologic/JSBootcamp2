@@ -1,0 +1,6 @@
+<span (click)="expanded=!expanded">{{folder.name}}</span>
+<ul *ngIf="expanded">
+<li *ngFor="let child of folder.children">
+  <app-folder [id]="child._id"></app-folder>
+</li>
+</ul>
