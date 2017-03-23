@@ -14,11 +14,11 @@ mongoose.connect('mongodb://localhost:27017/fs');
 
 app.all('*', function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
 });
 
 app.use('/api/owners', owners);
 app.use('/api/items', items);
 
-app.listen(3000);
+app.listen(8085);

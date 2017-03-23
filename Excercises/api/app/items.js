@@ -5,45 +5,78 @@ var Item = require('./item.model');
 var Owner = require('./owner.model');
 
 items.get('/init', function (req, res) {
-    Item.find({}, (err, items) => {
-        if (err) { res.status(500).send(err); return; }
-        if (items.length == 0) {
-            Owner.find({}).then((owners) => {
-                for (let _owner of owners) {
-                    new Item({ name: 'root', owner: _owner._id }).save();
-                }
-                res.send('ok');
-            }).catch((err) => {
-                res.status(500).send(err); return;
-            })
-        }
+    Item.remove({}).then(() => {
+        Item.find({}, (err, items) => {
+            if (err) { res.status(500).send(err); return; }
+            if (items.length == 0) {
+                Owner.find({}).then((owners) => {
+                    for (let _owner of owners) {
+                        new Item({ name: 'root', owner: _owner._id }).save();
+                    }
+                    res.send('ok');
+                }).catch((err) => {
+                    res.status(500).send(err); return;
+                })
+            }
+        });
     });
 });
 
 items.post('/update/:id', function (req, res) {
-    Item.findOne({ _id: req.body._id }).then((item) => {
-        if (!item) { res.json({ success: false, message: 'item_not_found' }); return; }
-        item.name = req.body.name;
-        if (req.body.content !== undefined) item.shared = req.body.shared;
-        if (req.body.content !== undefined) item.content = req.body.content
+    var newItem = req.body;
+    Item.findOne({ _id: newItem._id }).then((oldItem) => {
 
-        Item.findOne({ parentId: item.parentId, name: item.name }).then((found) => {
-            debugger;
-            if (found) { res.json({ success: false, message: 'item_already_exists' }); return; }
-            Item.findOneAndUpdate({ _id: item._id }, item, { new: true }).then(function (item) {
-                delete item._doc.parentId;
-                if (item._doc.content === undefined) {
-                    item._doc.children = [];
-                }
-                res.json({ success: true, item: item });
-            }).catch((err) => {
-                debugger;
+        // set updated prop
+        newItemUpdates = { name: newItem.name };
+        if (newItem.content !== undefined) newItemUpdates.content = newItem.content;
+
+        // check if item exists
+        if (!oldItem) { res.json({ success: false, message: 'item_not_found' }); return; }
+
+        // check if item name have been change
+        if (oldItem.name != newItem.name) {
+            // check if item with same name exists
+            Item.findOne({ parentId: oldItem.parentId, name: newItem.name, _id: { $not: { $eq: newItem._id } } }).then((sameNameItem) => {
+                if (sameNameItem) { res.json({ success: false, message: 'item_already_exists' }); return; }
+                update.call(this);
             });
-        })
+        } else {
+            update.call(this);
+        }
+
+        // do the update
+        function update() {
+            Item.findOneAndUpdate({ _id: newItem._id }, { $set: newItemUpdates }, { new: true }).then((item) => {
+                // prepare item before sending
+                delete item._doc.parentId;
+                if (item._doc.content === undefined) item._doc.children = [];
+                res.json({ success: true, item: item });
+            }).catch((err) => { });
+        }
 
     }).catch((err) => {
         res.json({ success: false, message: err.message });
     });
+});
+
+items.get('/delete/:id', function (req, res) {
+    deleteItem(req.params.id).then(() => {
+        res.json({ success: true });
+    })
+
+    function deleteItem(id) {
+        return new Promise((resolve) => {
+            Item.findByIdAndRemove({ _id: id }).then((item) => {
+                Item.find({ parentId: id }).then((items) => {
+                    var promises = [];
+                    for (let item of items || []) {
+                        promises.push(deleteItem(item._id));
+                    }
+                    Promise.all(promises).then(() => { resolve(); })
+                });
+            });
+        });
+    }
 });
 
 items.get('/get/:owner/:id?', function (req, res) {
