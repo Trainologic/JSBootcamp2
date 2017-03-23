@@ -1,0 +1,7 @@
+<div>
+  <ul>
+    <li *ngFor="let hero of heroes | sortHeroes:-1">
+      {{hero.name}} {{hero.gender}} {{ hero.powers | myUpperCase: '<<':'>>' }}
+    </li>
+  </ul>
+</div>
