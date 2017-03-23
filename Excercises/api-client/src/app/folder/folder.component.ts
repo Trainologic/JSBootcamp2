@@ -17,9 +17,18 @@ export class FolderComponent implements OnInit {
     this.folder = this.folder || { children: [] };
   }
 
+  addNewFolder() {
+    this.apiService.createItem(this.folder._id, 'folder', 'new folder').subscribe((response) => {
+      if (!response.success) { console.log(response.message); return; }
+      this.folder.children.push(response.item);
+    });
+  }
+
   ngOnInit() {
     this.apiService.getFolderById(this.id).subscribe((response) => {
       this.folder = response.item;
+    }, (err) => {
+      debugger;
     });
   }
 

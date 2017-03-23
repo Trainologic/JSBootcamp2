@@ -1,4 +1,4 @@
-<span (click)="expanded=!expanded">{{folder.name}}</span>
+<span (click)="expanded=!expanded">{{folder.name}}</span>: <a (click)="addNewFolder()">new folder</a>
 <ul *ngIf="expanded">
 <li *ngFor="let child of folder.children">
   <app-folder [id]="child._id"></app-folder>
