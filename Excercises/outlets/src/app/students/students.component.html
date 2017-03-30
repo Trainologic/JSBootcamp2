@@ -1,0 +1,36 @@
+<div class="flex">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Clicked</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td><a (click)="student.clicked=true" [routerLink]="[{ outlets: { 'basic': [student.name]} }]">{{student.name}}</a></td>
+        <td>{{student.gender}}</td>
+        <td>{{student.clicked}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Clicked</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td><a (click)="student.clicked=true" [routerLink]="[{ outlets: { 'details': [student.name] } }]">{{student.name}}</a></td>
+        <td>{{student.gender}}</td>
+        <td>{{student.clicked}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <router-outlet name="basic"></router-outlet>
+  <router-outlet name="details"></router-outlet>
+</div>
